@@ -1,21 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { Router, Scene, Stack } from 'react-native-router-flux';
+import MainView from './src/components/Views/MainView/MainView';
+import RoomView from './src/components/Views/RoomView/RoomView';
+
+// import MainLayout from './src/components/Layout/MainLayout'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={styles.container}>
+      <Router>
+        <Stack key='root'>
+          <Scene key='main' component={MainView} title='TWG-Chat' />
+          <Scene key='room' component={RoomView} title='Chat room' />
+        </Stack>
+      </Router>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
   },
 });
+
