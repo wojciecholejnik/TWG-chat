@@ -1,35 +1,50 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { StyleSheet, Text, View, ActivityIndicator, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { GET_ROOM_BY_ID } from '../../../queries';
-import RoomNav from '../../Common/RoomNav/RoomNav';
 import RoomHeader from '../../Common/RoomHeader/RoomHeader';
 import RoomContent from '../../Common/RoomContent/RoomContent';
+// import AsyncStorage from '@react-native-community/async-storage';
 
+// const aaatoken = async () => {
+//   try {
+//     const token = await AsyncStorage.getItem('receivedToken')
+
+//     if (token !== null) {
+//       console.log('hahaha, ', token)
+//       return token
+//     }
+//   } catch (e) {
+//     console.log(e)
+//   }
+// };
 
 
 export default function RoomView({id}) {
+  // aaatoken();
+  
+  const { loading, error, data } = useQuery(GET_ROOM_BY_ID(id), {pollInterval: 500})
 
-  const { loading, error, data } = useQuery(GET_ROOM_BY_ID(id))
-
-  if (loading) return <View><Text>Loading</Text></View>;
-  if (error) return <View><Text>Error</Text></View>
-
+  if (loading) return <View style={styles.other}><ActivityIndicator size='large'/></View>;
+  if (error) return <View style={styles.other}><Text>Error</Text></View>
 
   return (
-    <View style={styles.container}>
-      <RoomNav />
-      <RoomHeader name={data.room.name} />
-      <RoomContent messages={data.room.messages} user={data.room.user} />
-    </View>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <RoomHeader name={data.room.name} img={data.room.roomPic}/>
+      <RoomContent messages={data.room.messages} user={data.room.user} roomId={data.room.id}/>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'blue',
-    width: '100%',
-    height: '100%',
+    flex: 1,
+
   },
+  other: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });

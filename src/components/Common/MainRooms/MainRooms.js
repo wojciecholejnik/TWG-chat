@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import MainRoomsItem from '../MainRoomsItem/MainRoomsItem'
+import MainRoomsItem from '../MainRoomsItem/MainRoomsItem';
 
 
 export default function MainRooms({rooms}) {
+
   return (
     <ScrollView style= {styles.container}>
       {rooms.map(oneRoom => (

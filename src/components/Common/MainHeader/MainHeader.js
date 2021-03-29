@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 
 export default function MainHeader() {
@@ -7,7 +7,7 @@ export default function MainHeader() {
   return (
     <View style= {container}>
       <Text style= {headerText}>
-        Chat with your friends
+        TWG Chat app
       </Text>
     </View>
   );
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   headerText: {
-    width: '55%',
+    width: '100%',
+    paddingVertical: 40,
     color: 'white',
     fontSize: 35,
     fontWeight: '700',

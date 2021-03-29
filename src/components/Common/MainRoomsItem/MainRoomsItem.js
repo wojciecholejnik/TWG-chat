@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
 
 
-export default function MainRooms({icon, name, message}) {
+export default function MainRooms({icon, name}) {
   return (
       <View style={styles.roomContainer}>
         <Image 
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   name: {
-    // fontWeight: '800',
     paddingBottom: 5,
   }
 });

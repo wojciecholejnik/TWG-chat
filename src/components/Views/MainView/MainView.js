@@ -1,26 +1,23 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { settings } from '../../../settings';
-import MainHeader from '../../Common/MainHeader/MainHeader'
-// import MainUsers from '../../Common/MainUsers/MainUsers';
-import MainRooms from '../../Common/MainRooms/MainRooms';
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { useQuery } from '@apollo/client';
+import MainHeader from '../../Common/MainHeader/MainHeader'
+import MainRooms from '../../Common/MainRooms/MainRooms';
+import { settings } from '../../../settings';
 import { GET_ROOMS } from '../../../queries';
 
 
+export default function MainView  ({receivedToken}) {
+  
+  const { loading, error, data } = useQuery(GET_ROOMS, {pollInterval: 500})
 
+  if (loading) return <View style={styles.other}><ActivityIndicator size='large'/></View>;
+  if (error) return <View style={styles.other}><Text>Error</Text></View>
 
-export default function MainView() {
-
-  const { loading, error, data } = useQuery(GET_ROOMS)
-
-  if (loading) return <View><Text>Loading</Text></View>;
-  if (error) return <View><Text>Error</Text></View>
-
+  // console.log('receivedTokenFromLog: ', receivedToken);
   return (
     <View style={styles.container}>
       <MainHeader />
-      {/* <MainUsers /> */}
       <MainRooms rooms={data.usersRooms.rooms}/>
     </View>
   );
@@ -33,4 +30,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  other: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });

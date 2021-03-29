@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import Message from '../Message/Message';
+import Sender from '../Sender/Sender';
 
 export default class RoomContent extends React.Component {
   
@@ -9,14 +10,23 @@ export default class RoomContent extends React.Component {
     user: this.props.user,
   }
 
-  render(){
+   componentD(){
+    this.setState({
+      messages: this.props.messages,
+      user: this.props.user,
+    })
+  }
 
+  render(){
     return (
-      <ScrollView style={styles.container}>
-        {this.state.messages.map(message => (
-          <Message key={message.id} message={message} userID={this.state.user.id}/>
-        ))}
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView >
+          {this.state.messages.map(message => (
+            <Message key={message.id} message={message} userID={this.state.user.id}/>
+          ))}
+        </ScrollView>
+        <Sender roomId={this.props.roomId}/>
+      </View>
     );
 
   }
@@ -26,11 +36,12 @@ export default class RoomContent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',
+    flex: 1,
     backgroundColor: 'white',
     borderRadius: 40,
     marginTop: 30,
     paddingTop: 40,
+    paddingBottom: 70,
     paddingHorizontal: 5,
   },
   text: {

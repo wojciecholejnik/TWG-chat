@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { settings } from '../../../settings';
 
 export default function Message({message, userID}) {
