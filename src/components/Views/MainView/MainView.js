@@ -9,12 +9,11 @@ import { GET_ROOMS } from '../../../queries';
 
 export default function MainView  ({receivedToken}) {
   
-  const { loading, error, data } = useQuery(GET_ROOMS, {pollInterval: 500})
+  const { loading, error, data } = useQuery(GET_ROOMS, {pollInterval: 1000})
 
   if (loading) return <View style={styles.other}><ActivityIndicator size='large'/></View>;
   if (error) return <View style={styles.other}><Text>Error</Text></View>
 
-  // console.log('receivedTokenFromLog: ', receivedToken);
   return (
     <View style={styles.container}>
       <MainHeader />

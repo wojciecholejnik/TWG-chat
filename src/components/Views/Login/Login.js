@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Keyboard, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Keyboard, ActivityIndicator } from 'react-native';
 import { settings } from '../../../settings';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../../mutations';
@@ -7,13 +7,13 @@ import { Icon } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Actions } from 'react-native-router-flux';
 
-
 export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [done, setDone] = useState('nothing')
 
-  const [loginRequest, {loading, error, data}] = useMutation(LOGIN, {
+  const [loginUser, {loading, error, data}] = useMutation(LOGIN, {
     variables: {
       email: email,
       password: password,
@@ -30,6 +30,7 @@ export default function Login() {
   }
 
   if(loading){return <ActivityIndicator style={styles.other} size='large' />};
+  if(done === 'ok'){return <View style={styles.other} ><Text>Logged</Text><ActivityIndicator sieze='largr'/></View>};
 
   return (
     <View style={styles.container}>
@@ -62,12 +63,13 @@ export default function Login() {
           size={24}
           onPress={async () => {
             Keyboard.dismiss()
-            await loginRequest();
-            // await console.log(data.loginUser.token);
-            // AsyncStorage.setItem('receivedToken', data.loginUser.token);
-            await saveToken();
-            await Actions.main({receivedToken: data.loginUser.token})
-            // Actions.main();
+            await loginUser();
+            setDone('ok');
+            await setTimeout(()=>{
+              Actions.main();
+              setDone('nothing')
+            }, 2000);
+            saveToken();
           }}
         />
         </View>

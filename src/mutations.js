@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-
 export const SEND = gql`
   mutation sendMessage(
       $body: String!
