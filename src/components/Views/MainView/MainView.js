@@ -6,10 +6,9 @@ import MainRooms from '../../Common/MainRooms/MainRooms';
 import { settings } from '../../../settings';
 import { GET_ROOMS } from '../../../queries';
 
-
-export default function MainView  ({receivedToken}) {
+export default function MainView  () {
   
-  const { loading, error, data } = useQuery(GET_ROOMS, {pollInterval: 1000})
+  const { loading, error, data } = useQuery(GET_ROOMS, {pollInterval: 5000});
 
   if (loading) return <View style={styles.other}><ActivityIndicator size='large'/></View>;
   if (error) return <View style={styles.other}><Text>Error</Text></View>

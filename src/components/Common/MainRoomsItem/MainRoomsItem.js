@@ -1,8 +1,15 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
+// import { MESSAGE_ADDED_SUBSCRIPTION } from '../../../subscriptions';
+// import { useSubscription } from '@apollo/client';
 
+export default function MainRooms({icon, name, roomId}) {
 
-export default function MainRooms({icon, name}) {
+  // const { data: { messageAdded }, loading } = useSubscription(
+  //   MESSAGE_ADDED_SUBSCRIPTION,
+  //   { variables: { roomId } }
+  // );
+
   return (
       <View style={styles.roomContainer}>
         <Image 

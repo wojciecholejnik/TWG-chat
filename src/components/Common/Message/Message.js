@@ -4,7 +4,7 @@ import { settings } from '../../../settings';
 
 export default function Message({message, userID}) {
   const isMine = userID === message.user.id;
-
+  
   return (
     <View style={isMine ? styles.myContainer : styles.container} key={message.id}>
       <View style={isMine ? styles.myWrapper : styles.wrapper}>

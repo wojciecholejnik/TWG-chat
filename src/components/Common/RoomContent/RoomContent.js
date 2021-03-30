@@ -10,7 +10,7 @@ export default class RoomContent extends React.Component {
     user: this.props.user,
   }
 
-   componentD(){
+   componentDidMount(){
     this.setState({
       messages: this.props.messages,
       user: this.props.user,
@@ -28,9 +28,7 @@ export default class RoomContent extends React.Component {
         <Sender roomId={this.props.roomId}/>
       </View>
     );
-
   }
-
 }
 
 const styles = StyleSheet.create({

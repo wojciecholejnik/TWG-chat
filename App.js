@@ -1,37 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 import { ApolloProvider } from '@apollo/client';
 import MainView from './src/components/Views/MainView/MainView';
 import RoomView from './src/components/Views/RoomView/RoomView';
 import Login from './src/components/Views/Login/Login';
-import { getClient } from './src/settings';
-import AsyncStorage from '@react-native-community/async-storage';
+import { client } from './src/settings';
 
 
 export default function App() {
 
-  const [stateToken, setStateToken] = useState('');
-
-  const getToken = async () => {
-    try {
-      const token = await AsyncStorage.getItem('receivedToken')
-  
-      if (token !== null) {
-        setStateToken(token);
-      } 
-    } catch (e) {
-      ''
-    }
-  };
-
-  useEffect(() => {
-    getToken();
-  })
-
   return (
-    <ApolloProvider client={getClient(stateToken)}>
+    <ApolloProvider client={client}>
       <View style={styles.container}>
         <Router>
           <Scene key='root'>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { GET_ROOM_BY_ID } from '../../../queries';
 import RoomHeader from '../../Common/RoomHeader/RoomHeader';
